@@ -1,22 +1,19 @@
-import Link from "next/link";
+import { Heading } from "@/components/heading";
 import { initialTickets } from "@/data";
-import { ticketPath } from "@/paths";
+import { TicketItem } from "@/features/ticket/components/ticket-item";
 
-export default function TicketsPage() {
+const TicketsPage = () => {
   return (
-    <div>
-      <h2 className="text-xl">Tickets Page</h2>
+    <div className="flex flex-1 flex-col gap-y-8">
+      <Heading title="Tickets" description="All your tickets in one place" />
 
-      <div>
+      <div className="flex flex-1 animate-fade-in-from-top flex-col items-center gap-y-4">
         {initialTickets.map((ticket) => (
-          <div key={ticket.id}>
-            <h2 className="text-lg">{ticket.title}</h2>
-            <Link href={ticketPath(ticket.id)} className="underline">
-              View
-            </Link>
-          </div>
+          <TicketItem key={ticket.id} ticket={ticket} />
         ))}
       </div>
     </div>
   );
-}
+};
+
+export default TicketsPage;
