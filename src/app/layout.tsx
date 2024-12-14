@@ -1,11 +1,8 @@
 import "./globals.css";
-import { LucideKanban } from "lucide-react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import Link from "next/link";
-import { buttonVariants } from "@/components/ui/button";
-import { homePath, ticketsPath } from "@/paths";
 import { Header } from "@/components/header";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,22 +26,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header/>
-        <main
-          className="
-            min-h-screen flex-1
-            overflow-y-auto overflow-x-hidden
-            py-24 px-8
-            bg-secondary/20
-            flex flex-col
-          "
-        >
-          {children}
-        </main>
+        <ThemeProvider>
+          <Header />
+          <main className="flex min-h-screen flex-1 flex-col overflow-y-auto overflow-x-hidden bg-secondary/20 px-8 py-24">
+            {children}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,5 +1,5 @@
-import { Children, cloneElement, ReactElement, ReactNode } from "react";
 import { LucideMessageSquareWarning } from "lucide-react";
+import { cloneElement, ReactElement } from "react";
 import { cn } from "@/lib/utils";
 
 export function Placeholder({
