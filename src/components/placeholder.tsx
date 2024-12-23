@@ -18,7 +18,7 @@ export function Placeholder({
       })}
       <h2 className="text-center text-lg">{label}</h2>
       {cloneElement(button, {
-        className: cn("w-10", button.props.className),
+        className: cn("h-10", button.props.className),
       })}
     </div>
   );
