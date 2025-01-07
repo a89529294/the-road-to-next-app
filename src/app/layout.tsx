@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import localFont from "next/font/local";
 import { Header } from "@/components/header";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -43,6 +44,7 @@ export default function RootLayout({
             {children}
             <Toolbar />
           </main>
+          <Toaster expand />
         </ThemeProvider>
       </body>
     </html>

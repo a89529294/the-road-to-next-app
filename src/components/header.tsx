@@ -21,6 +21,7 @@ export function Header() {
         <Link
           className={buttonVariants({ variant: "default" })}
           href={ticketsPath()}
+          prefetch={false}
         >
           Tickets
         </Link>

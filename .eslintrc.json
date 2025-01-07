@@ -8,7 +8,8 @@
         "groups": [["^\\u0000", "^node:", "^@?\\w", "^", "^\\."]]
       }
     ],
-    "simple-import-sort/exports": "error"
+    "simple-import-sort/exports": "error",
+    "react-hooks/exhaustive-deps": "warn"
   },
   "parserOptions": {
     "sourceType": "module",

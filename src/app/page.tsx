@@ -8,7 +8,11 @@ export default async function HomePage() {
       <Heading title="Home" description="Your home place to start" />
 
       <div className="flex flex-1 flex-col items-center">
-        <Link href={ticketsPath()} className="text-sm underline">
+        <Link
+          prefetch={false}
+          href={ticketsPath()}
+          className="text-sm underline"
+        >
           Go to Tickets
         </Link>
       </div>
