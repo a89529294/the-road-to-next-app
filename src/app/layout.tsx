@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import localFont from "next/font/local";
 import { Header } from "@/components/header";
+import { RedirectToast } from "@/components/redirect-toast";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -33,6 +34,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  console.log("1. Root Layout Rendering");
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -44,6 +46,8 @@ export default function RootLayout({
             {children}
             <Toolbar />
           </main>
+
+          <RedirectToast />
           <Toaster expand />
         </ThemeProvider>
       </body>

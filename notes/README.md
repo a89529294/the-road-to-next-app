@@ -10,15 +10,23 @@
 
 ### seeding database
 
-1. `npm run prisma-seed`
+- `npm run prisma-seed`
 
 ### view database using prisma studio
 
-1. `npx prisma studio`
+- `npx prisma studio`
+
+### validate prisma schema
+
+- `npx prisma validate`
+
+### check db connection
+
+- `npx prisma db pull`
 
 ### prevent hot reloading from creating too many db connections
 
-1. See `src/lib/prisma.ts`
+- See `src/lib/prisma.ts`
 
 ### deployment on vercel
 
