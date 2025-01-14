@@ -48,7 +48,7 @@ export default function RootLayout({
           </main>
 
           <RedirectToast />
-          <Toaster expand />
+          <Toaster expand visibleToasts={1} />
         </ThemeProvider>
       </body>
     </html>

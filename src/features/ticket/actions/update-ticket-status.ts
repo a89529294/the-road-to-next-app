@@ -14,6 +14,8 @@ export const updateTicketStatus = async (
   ticketId: string,
   status: Ticket["status"],
 ): Promise<ActionState> => {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
   try {
     await prisma.ticket.update({
       where: {
@@ -24,10 +26,10 @@ export const updateTicketStatus = async (
       },
     });
   } catch (error) {
-    return fromErrorToActionState(error);
+    return Promise.reject(fromErrorToActionState(error));
   }
 
   revalidatePath(ticketsPath());
 
-  return toActionState("SUCCESS", "Ticket status updated");
+  return Promise.resolve(toActionState("SUCCESS", "Ticket status updated"));
 };

@@ -2,8 +2,9 @@
 
 import { Ticket } from "@prisma/client";
 import { LucideTrash } from "lucide-react";
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import { toast } from "sonner";
+import { useConfirmDialog } from "@/components/confirm-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,6 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { deleteTicket } from "@/features/ticket/actions/delete-ticket";
 import { updateTicketStatus } from "@/features/ticket/actions/update-ticket-status";
 import { TICKET_STATUS_LABELS } from "@/features/ticket/constants";
 
@@ -23,21 +25,26 @@ export function TicketMoreMenu({
   ticket: Ticket;
   trigger: ReactElement;
 }) {
-  const deleteButton = (
-    <DropdownMenuItem>
-      <LucideTrash className="mr-2 h-4 w-4" />
-      <span>Delete</span>
-    </DropdownMenuItem>
-  );
+  const [open, setOpen] = useState(false);
+  const { dialogTrigger: deleteButton, dialog: deleteDialog } =
+    useConfirmDialog({
+      trigger: (
+        <DropdownMenuItem>
+          <LucideTrash className="mr-2 h-4 w-4" />
+          Delete
+        </DropdownMenuItem>
+      ),
+      action: deleteTicket.bind(null, ticket.id),
+    });
 
   const handleUpdateTicketStatus = async (status: string) => {
-    const result = await updateTicketStatus(
-      ticket.id,
-      status as Ticket["status"],
-    );
+    const promise = updateTicketStatus(ticket.id, status as Ticket["status"]);
 
-    if (result.status === "SUCCESS") toast.success(result.message);
-    else toast.error(result.message);
+    toast.promise(promise, {
+      loading: "Updating ticket status...",
+      success: (result) => toast.success(result.message),
+      error: (result) => toast.error(result.message),
+    });
   };
 
   const ticketStatusRadioGroup = (
@@ -54,13 +61,16 @@ export function TicketMoreMenu({
   );
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
-      <DropdownMenuContent side="right" className="w-56">
-        {ticketStatusRadioGroup}
-        <DropdownMenuSeparator />
-        {deleteButton}
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <>
+      {deleteDialog}
+      <DropdownMenu open={open} onOpenChange={setOpen}>
+        <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
+        <DropdownMenuContent side="right" className="w-56">
+          {ticketStatusRadioGroup}
+          <DropdownMenuSeparator />
+          {deleteButton}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
   );
 }

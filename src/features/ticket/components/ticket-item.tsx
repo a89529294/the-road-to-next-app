@@ -3,7 +3,6 @@ import {
   LucideMoreVertical,
   LucidePencil,
   LucideSquareArrowOutUpRight,
-  LucideTrash,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -14,7 +13,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { deleteTicket } from "@/features/ticket/actions/delete-ticket";
 import { TicketMoreMenu } from "@/features/ticket/components/ticket-more-menu";
 import { TICKET_ICONS } from "@/features/ticket/constants";
 import { cn } from "@/lib/utils";
@@ -42,14 +40,6 @@ export async function TicketItem({
         <LucidePencil className="size-4" />
       </Link>
     </Button>
-  );
-
-  const deleteButton = (
-    <form action={deleteTicket.bind(null, ticket.id)}>
-      <Button variant="outline" size={"icon"}>
-        <LucideTrash className="size-4" />
-      </Button>
-    </form>
   );
 
   const moreMenu = (
@@ -100,7 +90,6 @@ export async function TicketItem({
         {isDetails ? (
           <>
             {editButton}
-            {deleteButton}
             {moreMenu}
           </>
         ) : (
