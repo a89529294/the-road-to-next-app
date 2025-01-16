@@ -3,7 +3,6 @@ import { Heading } from "@/components/heading";
 import { ticketsPath } from "@/paths";
 
 export default async function HomePage() {
-  console.log("1!!!!");
   return (
     <div className="flex flex-1 flex-col gap-y-8">
       <Heading title="Home" description="Your home place to start" />

@@ -2,33 +2,17 @@
 
 import { Ticket } from "@prisma/client";
 import { useActionState } from "react";
-import { toast } from "sonner";
 import { DatePicker } from "@/components/date-picker";
 import { FieldError } from "@/components/form/field-error";
 import { Form } from "@/components/form/form";
 import { SubmitButton } from "@/components/form/submit-button";
-import {
-  ActionState,
-  EMPTY_ACTION_STATE,
-} from "@/components/form/utils/to-action-state";
+import { EMPTY_ACTION_STATE } from "@/components/form/utils/to-action-state";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { upsertTicket } from "@/features/ticket/actions/upsert-ticket";
 import { useDerivedState } from "@/lib/hooks";
 import { fromCent } from "@/utils/currency";
-
-const onCreateTicketSuccess = ({
-  actionState,
-}: {
-  actionState: ActionState;
-}) => {
-  if (actionState.message) toast.success(actionState.message);
-};
-
-const onCreateTicketError = ({ actionState }: { actionState: ActionState }) => {
-  if (actionState.message) toast.error(actionState.message);
-};
 
 export function TicketUpsertForm({ ticket }: { ticket?: Ticket }) {
   const [actionState, action] = useActionState(
@@ -49,12 +33,7 @@ export function TicketUpsertForm({ ticket }: { ticket?: Ticket }) {
   };
 
   return (
-    <Form
-      action={action}
-      actionState={actionState}
-      onActionSuccess={onCreateTicketSuccess}
-      onActionError={onCreateTicketError}
-    >
+    <Form action={action} actionState={actionState}>
       <Label htmlFor="title">Title</Label>
       <Input
         type="text"
